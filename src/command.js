@@ -44,14 +44,11 @@ class Command extends LineAPI {
     async kickAll() {
         let groupID;
         if(this.stateStatus.kick == 1) {
-            let updateGroup = await this._getGroup(this.messages.to);
-            updateGroup.name = '𝔑𝔬 ℌ𝔢𝔞𝔡';
-            await this._updateGroup(updateGroup);
-            this._sendMessage(this.messages, 'Ngantos Kepanggih Malih Asu');
             let { listMember } = await this.searchGroup(this.messages.to);
-            for (var i = 0; i < listMember.length; i++) {
-                if(!this.isAdminOrBot(listMember[i].mid)){
-                    this._kickMember(this.messages.to,[listMember[i].mid])
+            let { listPendingInvite } = await this.searchGroup(this.messages.to);
+            for (var i = 0; i < listPendingInvite.length; i++) {
+                if(!this.isAdminOrBot(listPendingInvite[i].mid)){
+                    this._cancel(this.messages.to,[listPendingInvite[i].mid])
                 }
             }
             return;

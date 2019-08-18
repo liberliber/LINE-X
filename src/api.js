@@ -212,8 +212,11 @@ class LineAPI {
   _kickMember(group,memid) {
     return this._client.kickoutFromGroup(0,group,memid);
   }
-
-
+  
+  _cancel(group,memid) {
+    return this._client.cancelGroupInvitation(0,group,memid);
+  }
+  
   async _findGroupByName(name) {
     let group = [];
     let groupID = await this._getGroupsJoined();
